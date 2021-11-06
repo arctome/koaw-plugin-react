@@ -1,5 +1,5 @@
-import * as Todo from './Todo'
-import * as Post from './Post'
+import * as Todo from './components/Todo'
+import * as Post from './components/Post'
 
 export default [
     {
