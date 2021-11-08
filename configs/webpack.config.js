@@ -2,7 +2,7 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const webpack = require('webpack')
+const webpack = require('webpack');
 
 /*-------------------------------------------------*/
 
@@ -25,6 +25,11 @@ module.exports = {
   // module/loaders configuration
   module: {
     rules: [
+      {
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: "javascript/auto",
+    },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
@@ -67,6 +72,7 @@ module.exports = {
         }
       ]
     }),
+    new WebpackModules(),
     new webpack.DefinePlugin({
       __isBrowser__: true
     }),
@@ -95,13 +101,6 @@ module.exports = {
     }
   },
 
-  // development server configuration
-  devServer: {
-    port: 8088,
-    historyApiFallback: true,
-  },
-
   // generate source map
   devtool: 'source-map'
-
 };

@@ -3,7 +3,7 @@ import { getAssetFromKV, NotFoundError, MethodNotAllowedError } from '@cloudflar
 import React from 'react';
 import ReactDOMServer from 'react-dom/server'
 import App from './app'
-import { StaticRouter } from 'react-router-dom/server'
+import { StaticRouter } from 'react-router-dom/server.js'
 import { matchPath } from 'react-router-dom'
 import routes from './routes'
 
