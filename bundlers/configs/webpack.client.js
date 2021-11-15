@@ -56,7 +56,7 @@ module.exports = {
     new HTMLWebpackPlugin({
       filename: 'index.html',
       template: path.resolve(process.cwd(), './src/public/index.html'),
-      minify: isProd ? true : false,
+      minify: {collapseWhitespace: true},
       prefetch: ['*.js'],
     }),
     // extract css to external stylesheet file
