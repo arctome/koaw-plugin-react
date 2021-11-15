@@ -46,9 +46,7 @@ export function ReactSSRMiddleware(event, app, routes) {
         }
         const App = app.default;
         appHTML = ReactDOMServer.renderToString(
-          <StaticRouter location={event.request.url} >
-            <App serverProps={prefetchData} />
-          </StaticRouter>
+          e(StaticRouter, { location: event.request.url }, e(App, { serverProps: prefetchData })),
         )
         // populate `#app` element with `appHTML`
         ctx.res.body = indexHTML.replace('<!-- APP_PLACEHOLDER -->', appHTML).replace('<!-- SCRIPT_PLACEHOLDER -->', `<script>window.__INITIAL_DATA__ = ${JSON.stringify(prefetchData)}</script>`);
