@@ -31,7 +31,7 @@ async function handleEvent(event) {
   }
 }
 
-export function ReactSSRMiddleware(event, app, routes) {
+export function ReactSSRMiddleware(event, App, routes) {
   return async (ctx) => {
     try {
       const response = await handleEvent(event).catch(e => { console.log(e) });
@@ -44,7 +44,8 @@ export function ReactSSRMiddleware(event, app, routes) {
         if (matchRoute && matchRoute.component && typeof matchRoute.component.fetchDataOnEdge === 'function') {
           prefetchData = await matchRoute.component.fetchDataOnEdge();
         }
-        const App = app.default;
+        const e = React.createElement;
+
         appHTML = ReactDOMServer.renderToString(
           e(StaticRouter, { location: event.request.url }, e(App, { serverProps: prefetchData })),
         )
