@@ -25,9 +25,7 @@
     "koaw-js": "^0.0.3-canary.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-router-dom": "^6.0.1"
-  },
-  "peerDependencies": {
+    "react-router-dom": "^6.0.1",
     "@babel/core": "^7.16.0",
     "@babel/plugin-proposal-class-properties": "^7.16.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.16.0",
