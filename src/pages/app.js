@@ -3,7 +3,7 @@ import { NavLink as Link, Route, Routes } from 'react-router-dom'
 import routes from './routes';
 
 export default function App({ serverProps }) {
-  const data = __isBrowser__ ? window.__INITIAL_DATA__ : serverProps
+  const data = __isBrowser__ ? window.__INITIAL_DATA__ || {} : serverProps
   
   return (
     <div className='ui-app'>

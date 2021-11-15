@@ -2,10 +2,10 @@ import Koaw, { Transformer } from 'koaw-js'
 import { getAssetFromKV, NotFoundError, MethodNotAllowedError } from '@cloudflare/kv-asset-handler'
 import React from 'react';
 import ReactDOMServer from 'react-dom/server'
-import App from './app'
+import App from './pages/app'
 import { StaticRouter } from 'react-router-dom/server.js'
 import { matchPath } from 'react-router-dom'
-import routes from './routes'
+import routes from './pages/routes'
 
 addEventListener('fetch', (event) => {
   const app = new Koaw(event);

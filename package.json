@@ -4,8 +4,10 @@
   "description": "A plugin for koaw-js, render React at Edge.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config ./configs/webpack.config.js",
-    "dev": "webpack --config ./test/webpack.js && node ./test/miniflare-server.js"
+    "build:client": "NODE_ENV=production BUILD_TARGET=client webpack --config ./webpack.js",
+    "build:worker": "NODE_ENV=production BUILD_TARGET=worker webpack --config ./webpack.js",
+    "build": "npm run build:client && npm run build:worker",
+    "serve": "PORT=10081 node ./selfhost/miniflare-server.js"
   },
   "repository": {
     "url": ""
@@ -35,15 +37,18 @@
     "@babel/preset-env": "^7.16.0",
     "@babel/preset-react": "^7.16.0",
     "@babel/runtime": "^7.16.0",
+    "autoprefixer": "^10.4.0",
     "babel-loader": "^8.2.2",
     "copy-webpack-plugin": "^6.3.2",
     "css-loader": "^5.2.7",
     "html-webpack-plugin": "^4.5.0",
     "mini-css-extract-plugin": "^1.6.2",
     "miniflare": "^1.4.1",
+    "postcss-loader": "^4.2.0",
     "sass": "^1.43.4",
     "sass-loader": "^10.1.0",
     "webpack": "=4.46.0",
-    "webpack-cli": "^4.2.0"
+    "webpack-cli": "^4.2.0",
+    "webpack-merge": "^5.8.0"
   }
 }

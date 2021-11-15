@@ -6,7 +6,7 @@ export async function fetchDataOnEdge(url) {
     return response;
 }
 
-export default function Post({serverProps}) {
+export default function Post({ serverProps }) {
     return (
         <div className="post">{serverProps.title}</div>
     )
