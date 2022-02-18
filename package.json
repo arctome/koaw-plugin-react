@@ -10,6 +10,7 @@
     "wrangler": "0.0.17"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@rollup/plugin-babel": "^5.3.0",
@@ -24,10 +25,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
-    "preview": "npm run build && miniflare --site ./dist --site-include dist",
+    "preview": "npm run build && npx wrangler pages dev ./dist --kv HtmlTpls",
     "build": "npm run build:static && npm run build:worker",
     "build:static": "vite build",
-    "build:worker": "rollup -c --environment NODE_ENV:production"
+    "build:worker": "rollup -c"
   },
   "repository": {
     "type": "git",

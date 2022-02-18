@@ -5,27 +5,30 @@ import App from "./src/App.jsx"
 export default {
     async fetch(request, env) {
         const url = new URL(request.url);
-        const app = new Koaw({ request });
+        const app = new Koaw({ request }, {
+            debug: true
+        });
         const router = new KoawRouter();
+        const index_url = new URL(request.url);
+        index_url.pathname = "/"
+        
+        let template = await env.HtmlTpls.get("index.html")
+        if(!template) {
+            const template_request = await fetch(index_url.href);
+            template = await template_request.text();
+            env.HtmlTpls.put("index.html", template);
+        }
+
+        let external_request = ""
+        await fetch('http://jsonplaceholder.typicode.com/todos/1').then(response => response.json())
+            .then(json => {
+                external_request = JSON.stringify(json)
+            })
 
         router.get('/api/example', ctx => {
-            const html = `
-            <!DOCTYPE html>
-            <html lang="en">
-              <head>
-                <meta charset="UTF-8" />
-                <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <title>Vite App From Server</title>
-              </head>
-              <body>
-                <div id="root">${renderToString(App)}</div>
-                <script type="module" src="/src/main.jsx"></script>
-              </body>
-            </html>
-            `
-            ctx.res.body = html;
+            ctx.res.body = template.replace("<!--ssr-outlet-->", renderToString(App)).replace("<!--ssr-data-->", external_request);
             ctx.res.status = 200;
+            ctx.res.headers["Content-Type"] = "text/html; charset=utf-8";
             ctx.end();
         })
         app.use(router.route());

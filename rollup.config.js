@@ -20,7 +20,7 @@ export default {
         babel({
             extensions: ['.jsx', '.js', '.tsx'],
             exclude: ["node_modules/**"],
-            babelHelpers: "bundled",
+            babelHelpers: "runtime",
         }),
         terser(),
         replace({

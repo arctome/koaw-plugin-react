@@ -3,5 +3,5 @@
 ## Preview locally
 
 ```bash
-npx wrangler pages dev ./dist
+npx wrangler pages dev dist --kv HtmlTpls
 ```
