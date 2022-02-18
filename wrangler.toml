@@ -1,9 +1,0 @@
-name = "koaw-plugin-react"
-# type = "webpack"
-account_id = ""
-# webpack_config = "node_modules/koaw-plugin-react/webpack"
-compatibility_date = "2021-10-18"
-
-[site]
-bucket = "out"
-entry-point = "./dist/main.js"
