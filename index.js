@@ -6,7 +6,7 @@ export default {
         const app = new Koaw({ request });
         const router = new KoawRouter();
 
-        router.get('/example', ctx => {
+        router.get('/api/example', ctx => {
             ctx.res.body = "hello pages";
             ctx.res.status = 200;
             ctx.end();
