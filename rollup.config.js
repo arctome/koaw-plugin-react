@@ -2,12 +2,13 @@ import commonjs from '@rollup/plugin-commonjs'
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { babel } from '@rollup/plugin-babel';
 import { terser } from "rollup-plugin-terser";
+import replace from "@rollup/plugin-replace"
 
 export default {
     input: './index.js',
     output: {
         file: 'dist/_worker.js',
-        format: 'esm',
+        format: 'es',
     },
     plugins: [
         commonjs({
@@ -21,6 +22,10 @@ export default {
             exclude: ["node_modules/**"],
             babelHelpers: "bundled",
         }),
-        terser()
+        terser(),
+        replace({
+            'process.env.NODE_ENV': JSON.stringify('production'),
+            preventAssignment: true
+        })
     ],
 }

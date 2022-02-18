@@ -1,5 +1,5 @@
 import Koaw, { KoawRouter } from "koaw-js";
-import { renderToString } from "react-dom/server"
+import { renderToString } from "react-dom/server.browser"
 import App from "./src/App.jsx"
 
 export default {
