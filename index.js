@@ -1,4 +1,6 @@
 import Koaw, { KoawRouter } from "koaw-js";
+import { renderToString } from "react-dom/server"
+import App from "./src/App.jsx"
 
 export default {
     async fetch(request, env) {
@@ -7,15 +9,30 @@ export default {
         const router = new KoawRouter();
 
         router.get('/api/example', ctx => {
-            ctx.res.body = "hello pages";
+            const html = `
+            <!DOCTYPE html>
+            <html lang="en">
+              <head>
+                <meta charset="UTF-8" />
+                <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Vite App From Server</title>
+              </head>
+              <body>
+                <div id="root">${renderToString(App)}</div>
+                <script type="module" src="/src/main.jsx"></script>
+              </body>
+            </html>
+            `
+            ctx.res.body = html;
             ctx.res.status = 200;
             ctx.end();
         })
-
         app.use(router.route());
         if (url.pathname.startsWith('/api/')) {
             let response = await app.run();
-            return response || new Response("404 Not Found", { status: 404 });
+            // TODO: Will auto fallback to not-found response, need modify.
+            return response;
         }
         return env.ASSETS.fetch(request);
     }
