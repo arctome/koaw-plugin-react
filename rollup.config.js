@@ -22,9 +22,10 @@ export default {
             exclude: ["node_modules/**"],
             babelHelpers: "runtime",
         }),
-        terser(),
+        // terser(),
         replace({
             'process.env.NODE_ENV': JSON.stringify('production'),
+            // 'process.env.NODE_ENV': JSON.stringify('development'),
             preventAssignment: true
         })
     ],

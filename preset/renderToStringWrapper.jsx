@@ -1,10 +1,13 @@
 import { StaticRouter } from 'react-router-dom/server'
+import { StoreProvider } from './globalProvider.jsx'
 
 export default function RenderToStringWrapper(props) {
     const App = props.app;
     return (
-        <StaticRouter location={props.location}>
-            <App rootProps={props.root} />
-        </StaticRouter>
+        <StoreProvider store={props.store}>
+            <StaticRouter location={props.location}>
+                <App />
+            </StaticRouter>
+        </StoreProvider>
     )
 }

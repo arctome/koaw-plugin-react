@@ -27,7 +27,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
     "preview": "npm run build && npx wrangler pages dev ./dist --kv HtmlTpls",
-    "build": "npm run build:static && npm run build:worker",
+    "build": "npm run build:static && npm run build:worker && cp dist/index.html dist/__template__.html",
     "build:static": "vite build",
     "build:worker": "rollup -c"
   },
