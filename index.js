@@ -1,6 +1,6 @@
 import Koaw, { KoawRouter } from "koaw-js";
 import { renderToString } from "react-dom/server.browser"
-import RenderToStringWrapper from "./preset/renderToStringWrapper"
+import RenderToStringWrapper from "./preset/renderToStringWrapper.jsx"
 import App from "./src/App.jsx"
 
 export default {
