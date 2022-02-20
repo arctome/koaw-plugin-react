@@ -7,6 +7,7 @@
     "koaw-js": "^0.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.1",
     "wrangler": "0.0.17"
   },
   "devDependencies": {

@@ -1,5 +1,6 @@
 import Koaw, { KoawRouter } from "koaw-js";
 import { renderToString } from "react-dom/server.browser"
+import RenderToStringWrapper from "./preset/renderToStringWrapper"
 import App from "./src/App.jsx"
 
 export default {
@@ -11,9 +12,9 @@ export default {
         const router = new KoawRouter();
         const index_url = new URL(request.url);
         index_url.pathname = "/"
-        
+
         let template = await env.HtmlTpls.get("index.html")
-        if(!template) {
+        if (!template) {
             const template_request = await fetch(index_url.href);
             template = await template_request.text();
             env.HtmlTpls.put("index.html", template);
@@ -26,7 +27,9 @@ export default {
             })
 
         router.get('/api/example', ctx => {
-            ctx.res.body = template.replace("<!--ssr-outlet-->", renderToString(App)).replace("<!--ssr-data-->", external_request);
+            ctx.res.body = template.replace("<!--ssr-outlet-->", renderToString(RenderToStringWrapper({
+                app: App
+            }))).replace("<!--ssr-data-->", external_request);
             ctx.res.status = 200;
             ctx.res.headers["Content-Type"] = "text/html; charset=utf-8";
             ctx.end();
