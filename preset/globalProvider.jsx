@@ -12,8 +12,8 @@ function useStore() {
     return useContext(Context)
 }
 
-function StoreProvider({ children, store }) {
-    const [state, dispatch] = useReducer(reducer, store);
+function StoreProvider({ children }) {
+    const [state, dispatch] = useReducer(reducer, globalState);
 
     return (
         <Context.Provider value={[state, dispatch]}>
